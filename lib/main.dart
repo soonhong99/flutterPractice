@@ -1,150 +1,68 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:toonflix/widgets/currency_card.dart';
-import 'widgets/button.dart';
 
 void main() {
   // const : 한번 값을 넣으면 변경할 수 없다.
   runApp(const App());
 }
 
-class App extends StatelessWidget {
+class App extends StatefulWidget {
   const App({super.key});
 
   @override
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  @override
   Widget build(BuildContext context) {
+    // TODO: implement build
     return MaterialApp(
-      // 사람들이 우리 앱의 home(widget)에 갔을 때 무엇을 보여줘야 할까?
-      // class name constructor
-      home: Scaffold(
-        backgroundColor: const Color(0xFF181818),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(
-                  height: 50.0,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        const Text(
-                          'Hey, Selena',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 26,
-                            fontWeight: FontWeight.w800,
-                          ),
-                        ),
-                        Text(
-                          'Welcome back',
-                          style: TextStyle(
-                            color: Colors.white.withOpacity(0.8),
-                            fontSize: 16,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 80,
-                ),
-                Text(
-                  'Total Balance',
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.white.withOpacity(0.8),
-                  ),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                const Text(
-                  '\$5 194 482',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 44,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Button(
-                        text: 'Transfer',
-                        bgcolor: Color(0xFFF1B33B),
-                        textcolor: Colors.black),
-                    Button(
-                        text: 'Request',
-                        bgcolor: Color(0xFF1F2123),
-                        textcolor: Colors.white),
-                  ],
-                ),
-                const SizedBox(
-                  height: 80,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      'Wallets',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 36,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    Text(
-                      'View all',
-                      style: TextStyle(
-                        color: Colors.white.withOpacity(0.8),
-                        fontSize: 16,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                const CurrencyCard(
-                  offsetNum: 0,
-                  name: 'Euro',
-                  code: 'EUR',
-                  amount: '6 428',
-                  icon: Icons.euro_rounded,
-                  isInverted: false,
-                ),
-                const CurrencyCard(
-                  offsetNum: 1,
-                  name: 'Bitcoin',
-                  code: 'BTC',
-                  amount: '9 785',
-                  icon: Icons.currency_bitcoin,
-                  isInverted: true,
-                ),
-                const CurrencyCard(
-                  offsetNum: 2,
-                  name: 'Dollar',
-                  code: 'USD',
-                  amount: '',
-                  icon: Icons.attach_money,
-                  isInverted: false,
-                ),
-              ],
-            ),
+      theme: ThemeData(
+        textTheme: const TextTheme(
+          titleLarge: TextStyle(
+            color: Colors.red,
           ),
         ),
       ),
+      home: const Scaffold(
+        backgroundColor: Color(0xFFF4EDDB),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              MyLargeTitle(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class MyLargeTitle extends StatefulWidget {
+  const MyLargeTitle({
+    super.key,
+  });
+
+  @override
+  State<MyLargeTitle> createState() => _MyLargeTitleState();
+}
+
+class _MyLargeTitleState extends State<MyLargeTitle> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print('this is init');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    print('this is build');
+    return Text(
+      'My Large Title',
+      style: TextStyle(
+          fontSize: 30, color: Theme.of(context).textTheme.titleLarge!.color),
     );
   }
 }

@@ -15,6 +15,7 @@ class Webtoon extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
+            // DetailScreen을 build하고 title, thumbnail, id를 전달한다.
             builder: (context) =>
                 DetailScreen(title: title, thumb: thumb, id: id),
             fullscreenDialog: true,

@@ -1,7 +1,11 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:toonflix/models/webtoon_episode_model.dart';
 import 'package:toonflix/models/webtoon_model.dart';
+import 'package:toonflix/models/webtoon_detail_model.dart';
+import 'package:toonflix/widgets/webtoon_widget.dart';
 
 class ApiService {
   static const String baseUrl =
@@ -23,6 +27,34 @@ class ApiService {
       return webtoonInstances;
     }
     // 오류 발생시 Error함수 실행
+    throw Error();
+  }
+
+  // 왜 리스트 형식이 아니야? 안에서 id를 입력하면 해당 웹툰 id에 맞는 정보들만 나오기 때문이다.
+  static Future<WebtoonDetailModel> getToonById(String id) async {
+    final url = Uri.parse('$baseUrl/$id');
+    final response = await http.get(url);
+    if (response.statusCode == 200) {
+      final dynamic webtoon = jsonDecode(response.body);
+      var idWebtoonDetail = WebtoonDetailModel.fromJson(webtoon);
+      return idWebtoonDetail;
+    }
+    throw Error();
+  }
+
+  static Future<List<WebtoonEpisodeModel>> getLatestEpisodesById(
+      String id) async {
+    List<WebtoonEpisodeModel> episodesInstances = [];
+    final url = Uri.parse('$baseUrl/$id/episodes');
+    final response = await http.get(url);
+    if (response.statusCode == 200) {
+      final episodes = jsonDecode(response.body);
+      for (var episode in episodes) {
+        var webtoonEpisode = WebtoonEpisodeModel.fromJson(episode);
+        episodesInstances.add(webtoonEpisode);
+      }
+      return episodesInstances;
+    }
     throw Error();
   }
 }
